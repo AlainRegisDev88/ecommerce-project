@@ -5,20 +5,28 @@ import './HomePage.css'
 
 function HomePage() {
     const [products, setProducts] = useState([])
+    const [cart, setCart] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get('http://localhost:3000/api/products')
-        .then((response) => {
-            setProducts(response.data)
-        })
+            .then((response) => {
+                setProducts(response.data)
+            })
+
+        axios.get("http://localhost:3000/api/cart-items")
+            .then((response) => {
+                setCart(response.data)
+            })
     }, []) // dependency arrat: helps to control when useEffect runs; with the empty array, useEffect only runs once
-    
+
     return (
         <>
             <title>E-commerce Project</title>
             <link rel="icon" type="image/svg+xml" href="/home-favicon.png" />
 
-            <Header />
+            <Header
+                cart={cart}
+            />
 
             <div className="home-page">
                 <div className="products-grid">
