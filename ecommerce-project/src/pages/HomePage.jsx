@@ -1,15 +1,18 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import './HomePage.css'
-import { products } from '../../starter-code/data/products'
 
 function HomePage() {
-    fetch('http://localhost:3000/api/products')
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            console.log(data)
-        });
+    const [products, setProducts] = useState([])
 
+    useEffect(()=>{
+        axios.get('http://localhost:3000/api/products')
+        .then((response) => {
+            setProducts(response.data)
+        })
+    }, []) // dependency arrat: helps to control when useEffect runs; with the empty array, useEffect only runs once
+    
     return (
         <>
             <title>E-commerce Project</title>
