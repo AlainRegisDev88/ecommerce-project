@@ -8,10 +8,12 @@ function HomePage({ cart }) {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        axios.get('/api/products')
-            .then((response) => {
-                setProducts(response.data)
-            })
+        const fetchHomeData = async () => {
+            const response = await axios.get('/api/products');
+            setProducts(response.data);
+        }
+        fetchHomeData();
+
     }, []) // dependency arrat: helps to control when useEffect runs; with the empty array, useEffect only runs once
 
     return (
