@@ -11,26 +11,28 @@ import NotFound from './pages/NotFound'
 
 
 function App() {
-  const [cart, setCart] = useState([])
+    const [cart, setCart] = useState([])
 
-  useEffect(() => {
+    useEffect(() => {
+        const fetchCartData = async () => {
+            const response = await axios.get("/api/cart-items?expand=product")
+            setCart(response.data)
+        }
 
-    axios.get("/api/cart-items?expand=product")
-      .then((response) => {
-        setCart(response.data)
-      })
-  }, [])
+        fetchCartData();
+
+    }, [])
 
 
-  return (
-    <Routes>
-      <Route index element={<HomePage cart={cart} />} />
-      <Route path='/checkout' element={<CheckoutPage cart={cart} />} />
-        <Route path='/orders' element={<OrdersPage cart={cart} />} />
-      <Route path='/tracking' element={<TrackingPage cart={cart} />} />  
-      <Route path='*' element={<NotFound />} />
-    </Routes>
-  )
+    return (
+        <Routes>
+            <Route index element={<HomePage cart={cart} />} />
+            <Route path='/checkout' element={<CheckoutPage cart={cart} />} />
+            <Route path='/orders' element={<OrdersPage cart={cart} />} />
+            <Route path='/tracking' element={<TrackingPage cart={cart} />} />
+            <Route path='*' element={<NotFound cart={cart} />} />
+        </Routes>
+    )
 }
 
 export default App
