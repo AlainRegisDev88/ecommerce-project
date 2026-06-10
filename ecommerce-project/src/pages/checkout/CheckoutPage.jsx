@@ -1,7 +1,7 @@
 import CheckoutHeader from './CheckoutHeader';
 import './CheckoutPage.css'
 import axios from 'axios';
-import { useState, useEffect } from 'react'; 
+import { useState, useEffect } from 'react';
 import OrderSummary from './OrderSummary';
 import PaymentSummary from './PaymentSummary';
 
@@ -10,15 +10,21 @@ function CheckoutPage({ cart }) {
     const [paymentSummary, setPaymentSummary] = useState(null)
 
     useEffect(() => {
-        axios.get('api/delivery-options?expand=estimatedDeliveryTime')
-            .then((response) => {
-                setDeliveryOptions(response.data)
-            })
+        const fetchDeliveryData = async () => {
+            const response = await axios.get('api/delivery-options?expand=estimatedDeliveryTime')
+            setDeliveryOptions(response.data)
+        }
+        
+        fetchDeliveryData()
+        
         axios.get('/api/payment-summary')
             .then((response) => {
                 setPaymentSummary(response.data)
-            })
+            }) //kept to show how .then promise works
+
+        
     }, [])
+    
 
 
     return (

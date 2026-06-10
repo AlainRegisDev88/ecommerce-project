@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { Fragment } from 'react'
 import { Link } from 'react-router'
 
-export default function OrderDetails( {order} ) {
+export default function OrderDetails({ order }) {
     return (
         <div className="order-details-grid">
 
@@ -31,7 +31,7 @@ export default function OrderDetails( {order} ) {
                         </div>
 
                         <div className="product-actions">
-                            <Link to="/tracking">
+                            <Link to={`/tracking/${order.id}/${orderProduct.productId}`}>
                                 <button className="track-package-button button-secondary">
                                     Track package
                                 </button>

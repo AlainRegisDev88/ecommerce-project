@@ -79,3 +79,30 @@
   border-radius: 50px;
   width: 50%;
 }
+
+.loading-div {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* No animation here, so this container never moves! */
+}
+
+.loading-div span {
+  display: inline-block; 
+  animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    color: rgba(25, 135, 84, 0.4);
+    transform: scale(0.95); /* Grows safely inside the box */
+  }
+  to {
+    color: rgba(25, 135, 84, 1);
+    transform: scale(1.05);
+  }
+}
