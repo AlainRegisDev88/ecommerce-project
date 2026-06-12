@@ -20,7 +20,7 @@ export default function TrackingPage({ cart }) {
             console.log(response.data)
         }
         fetchOrderTrackingData();
-        
+
     }, [orderId])
 
 
@@ -67,7 +67,7 @@ export default function TrackingPage({ cart }) {
                     <div className="delivery-date">
                         {progressPercentage >= 100
                             ? `Delivered on - ${dayjs(matchingProduct.estimatedDeliveryTimeMs).format('MMMM D')}`
-                            : `Arrivingdd on - ${dayjs(matchingProduct.estimatedDeliveryTimeMs).format('MMMM D')}`
+                            : `Arriving on - ${dayjs(matchingProduct.estimatedDeliveryTimeMs).format('MMMM D')}`
                         }
                     </div>
 
