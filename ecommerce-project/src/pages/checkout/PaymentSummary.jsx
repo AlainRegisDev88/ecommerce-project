@@ -3,6 +3,7 @@ import formatMoney from '../../utils/money'
 
 
 export default function PaymentSummary( { paymentSummary }) {
+
     return (
         <div className="payment-summary">
             <div className="payment-summary-title">

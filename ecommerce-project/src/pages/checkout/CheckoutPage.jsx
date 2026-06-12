@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import OrderSummary from './OrderSummary';
 import PaymentSummary from './PaymentSummary';
 
-function CheckoutPage({ cart }) {
+function CheckoutPage({ cart, loadCart }) {
     const [deliveryOptions, setDeliveryOptions] = useState([])
     const [paymentSummary, setPaymentSummary] = useState(null)
 
@@ -23,9 +23,8 @@ function CheckoutPage({ cart }) {
             }) //kept to show how .then promise works
 
         
-    }, [])
+    }, [cart])
     
-
 
     return (
         <>
@@ -40,6 +39,7 @@ function CheckoutPage({ cart }) {
                     <OrderSummary
                         deliveryOptions={deliveryOptions}
                         cart={cart}
+                        loadCart={loadCart}
                     />
 
                     <PaymentSummary
