@@ -25,5 +25,16 @@ describe('Product Component', () => {
         expect(
             screen.getByText('$10.90')
         ).toBeInTheDocument()
+        expect(
+            screen.getByTestId('product-image')
+        ).toHaveAttribute('src', 'images/products/athletic-cotton-socks-6-pairs.jpg')
+
+        expect(
+            screen.getByTestId("product-rating-stars")
+        ).toHaveAttribute('src', 'images/ratings/rating-45.png')
+
+        expect(
+            screen.getByText('87')
+        ).toBeInTheDocument()
     })
 })
