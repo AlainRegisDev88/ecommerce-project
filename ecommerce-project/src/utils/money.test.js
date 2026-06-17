@@ -8,5 +8,8 @@ describe('formatMoney', () => {
     it('displays 2 decimal mumbers', () => {
         expect(formatMoney(1550)).toBe('$15.50');
         expect(formatMoney(100)).toBe('$1.00');
+        expect(formatMoney(0)).toBe('$0.00')
+        expect(formatMoney(-999)).toBe('$-9.99')
+        expect(formatMoney(-100)).toBe('$-1.00')
     })
 })

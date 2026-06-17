@@ -1,6 +1,6 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest'
 import Product from './Product'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import axios from 'axios'
 vi.mock('axios')
@@ -11,6 +11,9 @@ describe('Product Component', () => {
 
 
     beforeEach(() => {
+
+        vi.clearAllMocks()
+
         product = {
             id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
             image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -46,6 +49,9 @@ describe('Product Component', () => {
         expect(
             screen.getByText('87')
         ).toBeInTheDocument()
+        expect(
+            screen.getByTestId("quantity-selector")
+        ).toHaveValue('1')
     })
 
 
@@ -67,6 +73,32 @@ describe('Product Component', () => {
             }
         )
         expect(loadCart).toHaveBeenCalled()
+    })
 
+    it('changes the quantity', async () => {
+        render(<Product product={product} loadCart={loadCart} />)
+
+        const user = userEvent.setup()
+        const quantitySelector = screen.getByTestId('quantity-selector')
+        await user.selectOptions(quantitySelector, '3')
+
+        
+
+        await waitFor(() => {
+            
+            expect(quantitySelector.value).toBe('3')
+            expect(
+                axios.post
+            ).toHaveBeenCalledWith(
+                '/api/cart-items',
+                {
+                    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+                    quantity: 3
+                }
+            )
+        })
+        // expect(
+        //     loadCart
+        // ).toHaveBeenCalled()
     })
 })
